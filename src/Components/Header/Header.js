@@ -18,7 +18,7 @@ const Header = () => {
         <Grid container id="Header_container">
           <Grid item xs={8} className="header_grids">
             {/* <MenuIcon id="Burger_icon" /> */}
-            <Paper className={classes.leftPaper}>Task Reminder App</Paper>
+            <Paper className={classes.leftPaper}>MemoTask App</Paper>
           </Grid>
           <Grid item xs={4}>
             {/* <Paper className={classes.rightPaper} id="rightPaper">xs=6</Paper> */}

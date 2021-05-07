@@ -11,17 +11,35 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 
-const Add_TaskForm = () => {
+const Add_TaskForm = ({ onAdd }) => {
     const classes = useStyles();
 
+  // component level states lang ni sila diri dapit
     const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
-    const [date, setDate] = useState("");
-    const [category, setCategory] = useState("");
-    const [important, setImportant] = useState(false);
+    const [description, setDescription] = useState("");
+    const [schedule, setSchedule] = useState("");
+    const [type, setType] = useState("");
+    const [reminder, setReminder] = useState(false);
+
+    const onSubmit = (e) => {
+      e.preventDefault();
+
+      if (title === "") {
+        alert("Please fill in all the fields.")
+        return
+      }
+
+      onAdd({ title, description, schedule, type, reminder })
+
+      setTitle('')
+      setDescription('')
+      setSchedule('')
+      setType('')
+      setReminder(false)
+    }
 
     return (
-      <form className={classes.root} id="form" noValidate autoComplete="off">
+      <form className={classes.root} id="form" onSubmit={(e) => onSubmit(e)} noValidate autoComplete="off">
         <TextField
           id="txt_task_title"
           label="Task Title"
@@ -34,8 +52,8 @@ const Add_TaskForm = () => {
           id="txt_task_desc"
           label="Description"
           variant="outlined"
-          value={desc}
-          onChange={(e)=>setDesc(e.target.value)}
+          value={description}
+          onChange={(e)=>setDescription(e.target.value)}
         />
 
         <TextField
@@ -49,8 +67,8 @@ const Add_TaskForm = () => {
             shrink: true,
           }}
 
-          value={date}
-          onChange={(e)=>setDate(e.target.value)}
+          value={schedule}
+          onChange={(e)=>setSchedule(e.target.value)}
         />
 
         <FormControl variant="outlined" className={classes.formControl}>
@@ -64,8 +82,8 @@ const Add_TaskForm = () => {
             // onChange={handleChange}
             label="Age"
             required
-            value={category}
-            onChange={(e)=>setCategory(e.target.value)}
+            value={type}
+            onChange={(e)=>setType(e.target.value)}
           >
             <MenuItem value="">
               <em>None</em>
@@ -80,13 +98,14 @@ const Add_TaskForm = () => {
           // value="start"
           control={<Checkbox color="primary" />}
           style={{ marginLeft: "5px", width: "250px" }}
+          checked={reminder}
           label="Set Reminder as Important"
           labelPlacement="end"
-          value={important}
-          onChange={(e)=>setImportant(e.currentTarget.checked)}
+          value={reminder}
+          onChange={(e)=>setReminder(e.currentTarget.checked)}
         />
 
-        <Button tuype="submit" variant="contained" id="btn_add">
+        <Button type="submit" variant="contained" id="btn_add" onClick={(e) => onSubmit(e)}>
           Add Reminder
         </Button>
       </form>
