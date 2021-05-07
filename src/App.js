@@ -16,6 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography';
 import EmptyTask_UI from './Components/Tasks/EmptyTask_UI';
 
 function App() {
@@ -95,7 +96,11 @@ function App() {
         <Grid item xs={12} sm={8}>
           <Paper className={classes.paper}>
             {tasks.length > 0 ? (
-              <Tasks tasks={tasks} onDelete={deleteItem} toggleImportant={toggleImportant} />
+              <Tasks
+                tasks={tasks}
+                onDelete={deleteItem}
+                toggleImportant={toggleImportant}
+              />
             ) : (
               <EmptyTask_UI />
             )}
@@ -104,7 +109,22 @@ function App() {
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4}>
-          <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Paper className={classes.paper}>
+            <Typography
+              component="span"
+              variant="body2"
+              style={{
+                display: "inline",
+                fontFamily: "Poppins",
+                fontWeight: "600",
+                fontSize: "18px",
+                color: "grey"
+              }}
+              color="textPrimary"
+            >
+              Task Dashboard Coming Soon
+            </Typography>
+          </Paper>
         </Grid>
       </Grid>
 
