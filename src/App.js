@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Header from './Components/Header/Header';
 import Tasks from './Components/Tasks/Tasks';
@@ -31,36 +31,44 @@ function App() {
     setOpen(false);
   };
   
-  const [tasks, setTasks] = useState([
-    {
-        id: "1",
-        title: "Meeting with Mr. Stark",
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        schedule: "Dec. 25, 2021",
-        type: "work",
-        reminder: "false",
-      },
-      {
-        id: "2",
-        title: "Go to gym",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
-        schedule: "May 25, 2021",
-        type: "fitness",
-        reminder: "false",
-      },
-      {
-        id: "3",
-        title: "Have your fridge filled.",
-        description: "eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        schedule: "May 25, 2021",
-        type: "shopping",
-        reminder: "true",
-      },
-])
+  
+
+
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    const getTasks = async()=> {
+      const taskGikanServer = await fetchTasks()
+      setTasks(taskGikanServer)
+
+      console.log("Mga data gikan static server: ", taskGikanServer)
+    }
+    getTasks()
+  }, []);
+
+  // pagkuha sa tanan data from backend
+  const fetchTasks = async() => {
+    const res = await fetch('http://localhost:3001/tasks')
+    const data = await res.json()
+
+    return data
+  }
 
   // Add Action
-  const addTask = (task) => {
-    // console.log(task)
+  const addTask = async(task) => {
+     // THIS IS TO ADD AN ITEM IF NAA NAY DB SERVER NA PWEDE TA MAKA ADD and Persist added data
+    // const res = await fetch(`${process.env.REACT_APP_UR}/tasks`, {
+    //   method: 'POST',
+    //   header: {
+    //     'Content-type': 'application/json'
+    //   },
+    //   body: JSON.stringify(task)
+    // })
+
+    // const data = await res.json()
+    // setTasks([...tasks, data])
+
+
     const id = Math.floor(Math.random() * 10000) + 1
 
     const newTask = { id, ...task }
@@ -68,17 +76,53 @@ function App() {
   }
 
   // Delete Action
-  const deleteItem = (id) => {
+  const deleteItem = async(id) => {
+
+    // THIS IS TO DELETE AN ITEM IF NAA NAY DB SERVER NA PWEDE TA MAKADELETE and Persist Data mods.
+    // await fetch(`${process.env.REACT_APP_UR}/tasks/${id}`, {
+    //   method: "DELETE",
+    // })
+
    setTasks(tasks.filter((task) => task.id !== id))
+
+  
+  }
+
+
+  // get specific task for value update
+  const fetchATask = async(id) => {
+    const res = await fetch(`${process.env.REACT_APP_UR}/tasks/${id}`)
+    const data = await res.json()
+
+    return data
   }
 
   // Mark as Important
-  const toggleImportant = (id) => {
+  const toggleImportant = async(id) => {
+    // THIS IS TO UPDATE AN ITEM IF NAA NAY DB SERVER NA PWEDE TA UPDATE and Persist Data mods.
+    // const taskToUpdate = await fetchATask(id)
+    // const updatedTask = { ...taskToUpdate, reminder: !taskToUpdate.reminder }
+
+    // const res = await fetch(`${process.env.REACT_APP_UR}/tasks/${id}`, {
+    //   method: 'UPDATE',
+    //   header: {
+    //         'Content-type': 'application/json'
+    //       },
+    //       body: JSON.stringify(updatedTask)
+    // })
+
+    // const data = await res.json()
+
+    // setTasks(
+    //   tasks.map((task) => task.id === id ? { ...task, reminder: data.reminder } : task)
+    // )
+
     setTasks(
       tasks.map((task) => task.id === id ? { ...task, reminder: !task.reminder } : task)
     )
     console.log(id)
   }
+
 
   return (
     <div className="App">
@@ -118,7 +162,7 @@ function App() {
                 fontFamily: "Poppins",
                 fontWeight: "600",
                 fontSize: "18px",
-                color: "grey"
+                color: "grey",
               }}
               color="textPrimary"
             >
@@ -144,6 +188,7 @@ function App() {
           <Add_TaskModal onAdd={addTask} />
         </Fade>
       </Modal>
+
     </div>
   );
 }
