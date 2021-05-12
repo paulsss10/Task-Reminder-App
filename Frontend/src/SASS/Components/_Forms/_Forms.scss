@@ -1,0 +1,35 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // padding: 0 2em;
+
+    // Tasks Form Section
+    .MuiFormControl-root {
+        min-width: 100% !important;
+        margin-bottom: 1.1em;
+
+
+    }
+
+    .MuiFormControlLabel-root {
+        align-self: normal;
+        margin-top: 0.01em;
+        margin-bottom: 1.4em;
+
+        .MuiCheckbox-colorPrimary.Mui-checked {
+            color: #08b450 !important;
+        }
+    }
+    
+  
+    #submit_btn {
+        width: 100%;
+        background-color: #08b450;
+        font-weight: bold;
+        font-size: 18px;
+        color: #fafafa;
+    }
+}
+
+

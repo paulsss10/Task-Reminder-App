@@ -1,0 +1,18 @@
+* {
+    font-family: 'Poppins';
+}
+
+#task_mainGrid {
+    // padding: 0 0.9em;
+    padding: 1.5em 1.5em;
+    width: 100%;
+
+    .inner_grids {
+        // padding: 0 2em;
+
+        h2 {
+            margin-bottom: 1.5em;
+            color: #464c4f;
+        }
+    }
+}
