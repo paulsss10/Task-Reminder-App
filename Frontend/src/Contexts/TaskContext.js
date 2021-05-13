@@ -1,22 +1,33 @@
-import React, { useState, createContext } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 
 export const TaskContext = createContext();
 
 export const TaskProvider = (props) => {
-    const [taskList, setTaskList] = useState([
-      {
-        id: "1",
-        title: "Meeting with Mr. Stark",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        schedule: "Dec. 25, 2021",
-        type: "work",
-        reminder: "false",
-      },
-    ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [taskList, setTaskList] = useState([]);  
+
+    useEffect(() => {
+      const getTasks = async() => {
+        const taskGikanServer = await fetchTasks()
+        setTaskList(taskGikanServer)
+
+        
+      }
+      getTasks()
+    }, []);
+
+    const fetchTasks = async () => {
+      setIsLoading(true);
+      const res = await fetch("http://localhost:5000/tasks");
+      const resData = await res.json();
+
+      return resData.tasks
+      
+
+    };
 
     return (
-        <TaskContext.Provider value={[taskList, setTaskList]}>
+        <TaskContext.Provider value={[taskList, setTaskList], [isLoading, setIsLoading]}>
             {props.children}
         </TaskContext.Provider>
     )

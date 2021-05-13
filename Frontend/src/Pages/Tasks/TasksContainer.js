@@ -1,15 +1,17 @@
-import React, { useContext } from 'react';
-import Tasks from './Tasks';
+import React, { useState, useContext } from 'react';
+import Tasks from '../../Components/TaskComponents/Tasks';
+import { TaskForm } from '../../Components/TaskComponents/Forms';
 import '../../SASS/_Tasks/_TasksContainer.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import { TaskForm } from '../../Components/Forms/Forms';
 import {TaskContext} from '../../Contexts/TaskContext';
 
 const TasksContainer = () => {
     const classes = useStyles();
-    const [tasks, setTasks] = useContext(TaskContext);
+    const [taskList, setTaskList] = useContext(TaskContext)
+    const [tasks, setTasks] = useState([{taskList}]);
+
 
 
     return (
@@ -24,6 +26,7 @@ const TasksContainer = () => {
           <Grid item xs={12} md={8}className="inner_grids" id="right_grid">
             <Paper className={classes.paper}>
               {tasks.map(task => (
+                
                 <Tasks title={task.title} description={task.description} key={task.id} />
               ))}
               

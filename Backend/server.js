@@ -1,51 +1,30 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const uuid = require('uuid');
+const cors = require('cors');
+const mongoose = require('mongoose');
+
+const TaskRouter = require('./routes/tasks');
+
+require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 5000;
 
-const DUMMY_DATA = []; // cache/im-memory storage
+app.use(cors());
+app.use(express.json());
 
-app.use(bodyParser.json());
+// DB Connection
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
 
-// CORS HEADER => cross-server comm
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
+const connection = mongoose.connection;
+connection.once('open', () => {
+    console.log("DB Connection success");
+})
 
-    res.setHeader(
-        'Access-Control-Allow-Methods',
-        'Get, POST, PATCH, DELETE, OPTIONS'
-    );
-    next();
+
+app.use('/task', TaskRouter);
+
+
+app.listen(port, () => {
+    console.log(`Running @Port: ${port}`);
 });
-
-app.get('/tasks', (req, res, next) => {
-    res.status(200).json({ tasks: DUMMY_DATA });
-});
-
-app.post('/task', (req, res, next) => {
-    const { title, description } = req.body;
-
-    if (!title || title.trim().length === 0 || !description || description.trim().length === 0) {
-        return res.status(422).json({
-            message: 'Invalid input...'
-        });
-    }
-    
-    const createTask = {
-        id: uuid(),
-        title,
-        price
-    };
-
-    DUMMY_DATA.push(createTask);
-
-    res.status(201).json({ message: "You created a task!", tasks: createTask });
-});
-
-
-app.listen(5000); // host backend on port 5000
