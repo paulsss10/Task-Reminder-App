@@ -14,5 +14,33 @@
             margin-bottom: 1.5em;
             color: #464c4f;
         }
+
+        #task_wrapper {
+            height: 500px ;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            
+          }
+          
+          /* Track */
+          ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey; 
+            border-radius: 10px;
+          }
+           
+          /* Handle */
+          ::-webkit-scrollbar-thumb {
+            background: #13aa52; 
+            border-radius: 10px;
+          }
+          
+          /* Handle on hover */
+          ::-webkit-scrollbar-thumb:hover {
+            background: #158d47; 
+          }
     }
 }

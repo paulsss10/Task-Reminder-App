@@ -22,7 +22,11 @@ const TasksContainer = () => {
           </Grid>
           <Grid item xs={12} md={8}className="inner_grids" id="right_grid">
             <Paper className={classes.paper}>
-              <Tasks />
+            <h2>Your Tasks</h2>
+              <div id="task_wrapper">
+                <Tasks />
+              </div>
+              
             </Paper>
           </Grid>
         </Grid>
