@@ -5,12 +5,9 @@ import '../../SASS/_Tasks/_TasksContainer.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import {TaskContext} from '../../Contexts/TaskContext';
 
 const TasksContainer = () => {
     const classes = useStyles();
-    const [taskList, setTaskList] = useContext(TaskContext)
-    const [tasks, setTasks] = useState([{taskList}]);
 
 
 
@@ -25,11 +22,7 @@ const TasksContainer = () => {
           </Grid>
           <Grid item xs={12} md={8}className="inner_grids" id="right_grid">
             <Paper className={classes.paper}>
-              {tasks.map(task => (
-                
-                <Tasks title={task.title} description={task.description} key={task.id} />
-              ))}
-              
+              <Tasks />
             </Paper>
           </Grid>
         </Grid>

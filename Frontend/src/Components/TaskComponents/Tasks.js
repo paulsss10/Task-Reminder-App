@@ -1,13 +1,11 @@
-import React, { useState, useContext } from 'react'
-import {TaskContext} from '../../Contexts/TaskContext';
+import React, { useState, useContext } from 'react';
 
-const Tasks = ({ id, title, description }) => {
-    const [isLoading, setIsLoading] = useContext(TaskContext);
+const Tasks = () => {
 
     return (
-        <div key={id}>
-           <h5>{title}</h5> 
-           <small>{description}</small>
+        <div>
+           {/* <h5>{title}</h5> 
+           <small>{description}</small> */}
            
         </div>
     )
