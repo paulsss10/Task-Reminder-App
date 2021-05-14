@@ -2,10 +2,12 @@
     font-family: 'Poppins';
 }
 
+
 #task_mainGrid {
     // padding: 0 0.9em;
     padding: 1.5em 1.5em;
     width: 100%;
+    margin: 0px 0px;
 
     .inner_grids {
         // padding: 0 2em;
@@ -16,7 +18,7 @@
         }
 
         #task_wrapper {
-            height: 500px ;
+            height: 450px ;
             overflow-y: auto;
             padding-right: 5px;
         }
