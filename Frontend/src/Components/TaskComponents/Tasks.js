@@ -34,14 +34,17 @@ const Tasks = () => {
             title: 'Confirm to Delete Task',
             message: 'Are you sure to delete this task? ' ,
             buttons: [
+                {
+                    label: 'No',
+                    onClick: () => "",
+                    className: 'no_btn'
+                  },
               {
                 label: 'Yes',
-                onClick: () => onDelete(id)
+                onClick: () => onDelete(id),
+                className: 'yes_btn'
               },
-              {
-                label: 'No',
-                onClick: () => ""
-              }
+              
             ]
           })
     }
