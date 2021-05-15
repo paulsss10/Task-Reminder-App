@@ -11,10 +11,15 @@
 
     .inner_grids {
         // padding: 0 2em;
+        background-color: #fafafa;
 
         h2 {
             margin-bottom: 1.5em;
             color: #464c4f;
+        }
+
+        #right_grid {
+          background-color: #fafafa;
         }
 
         #task_wrapper {

@@ -6,6 +6,7 @@ import '../../SASS/_Tasks/_TasksContainer.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import NoTask from '../../Components/TaskComponents/NoTask';
 
 const TasksContainer = () => {
     const classes = useStyles();
@@ -23,20 +24,16 @@ const TasksContainer = () => {
     return (
       <React.Fragment>
         <Grid container spacing={3} id="task_mainGrid">
-          <Grid item xs={12}  md={4} className="inner_grids" id="left_grid">
+          <Grid item xs={12}  md={5} className="inner_grids" id="left_grid">
             <Paper className={classes.paper}>
                 <h2>Add Your Tasks Here</h2>
               <TaskForm />
             </Paper>
           </Grid>
-          <Grid item xs={12} md={8}className="inner_grids" id="right_grid">
+          <Grid item xs={12} md={7}className="inner_grids" id="right_grid">
             <Paper className={classes.paper}>
-            <h2>Your Tasks</h2>
-              <div id="task_wrapper">
-                {tasks.length > 0 ? <Tasks /> : "NO TASK FOR NOW" }
-                
-              </div>
-              
+                <h2>Your Tasks</h2>
+                {tasks.length > 0 ? <div id="task_wrapper"><Tasks /></div> : <NoTask /> }
             </Paper>
           </Grid>
         </Grid>
