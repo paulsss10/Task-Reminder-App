@@ -27,7 +27,7 @@ const Tasks = () => {
 
             })
             .catch(err => console.log("Error fetching data from DB.: ", err))
-    }, []);
+    }, [tasks]);
 
     const onDeleteConfirmation = ( id ) => {
         confirmAlert({
@@ -58,7 +58,9 @@ const Tasks = () => {
   return (
     <React.Fragment>
         {tasks.map((task) => {
+            
             return (
+                
               <Card key={task._id} className={classes.root} variant="outlined">
                 <CardContent>
                   <Typography variant="h5" component="h2" id="task_title">
@@ -70,7 +72,7 @@ const Tasks = () => {
                     {Moment(task.schedule).format('DD-MMMM-YYYY')}
                   </Typography>
                   <Typography variant="body2" component="p">
-                    Description of the the task is placed here
+                    {task.description}
                   </Typography>
                 </CardContent>
                 <CardActions>

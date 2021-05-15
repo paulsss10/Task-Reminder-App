@@ -1,4 +1,5 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 import Tasks from '../../Components/TaskComponents/Tasks';
 import { TaskForm } from '../../Components/TaskComponents/Forms';
 import '../../SASS/_Tasks/_TasksContainer.scss';
@@ -8,8 +9,16 @@ import Grid from '@material-ui/core/Grid';
 
 const TasksContainer = () => {
     const classes = useStyles();
+    const [tasks, setTasks] = useState([]);
 
+    useEffect(() => {
+      axios.get('http://localhost:5000/task/')
+          .then(res => {
+              setTasks(res.data)
 
+          })
+          .catch(err => console.log("Error fetching data from DB.: ", err))
+  }, [tasks]);
 
     return (
       <React.Fragment>
@@ -24,7 +33,8 @@ const TasksContainer = () => {
             <Paper className={classes.paper}>
             <h2>Your Tasks</h2>
               <div id="task_wrapper">
-                <Tasks />
+                {tasks.length > 0 ? <Tasks /> : "NO TASK FOR NOW" }
+                
               </div>
               
             </Paper>
