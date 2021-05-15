@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import '../../SASS/_Tasks/_Tasks.scss';
 import axios from 'axios';
+import Moment from 'moment';
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css' 
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -24,7 +27,33 @@ const Tasks = () => {
 
             })
             .catch(err => console.log("Error fetching data from DB.: ", err))
-    }, [])
+    }, []);
+
+    const onDeleteConfirmation = ( id ) => {
+        confirmAlert({
+            title: 'Confirm to Delete Task',
+            message: 'Are you sure to delete this task? ' ,
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => onDelete(id)
+              },
+              {
+                label: 'No',
+                onClick: () => ""
+              }
+            ]
+          })
+    }
+
+    const onDelete = (id) => {
+       axios.delete('http://localhost:5000/task/' + id)
+        .then(res => alert("Task has been deleted.", res.data))
+        .catch(err => console.log("Error deleting. " + err))
+
+    }
+
+
 
   return (
     <React.Fragment>
@@ -36,7 +65,9 @@ const Tasks = () => {
                     {task.title}
                   </Typography>
                   <Typography className={classes.pos} color="textSecondary">
-                    on Schedule
+                    {/* {task.schedule} */}
+
+                    {Moment(task.schedule).format('DD-MMMM-YYYY')}
                   </Typography>
                   <Typography variant="body2" component="p">
                     Description of the the task is placed here
@@ -60,6 +91,8 @@ const Tasks = () => {
                     title="Scrap this task"
                     placement="bottom"
                     aria-label="delete-details"
+                    // onClick={(id) => onDelete(task._id)}
+                    onClick={(id) => onDeleteConfirmation(task._id)}
                   >
                     <IconButton aria-label="delete" className={classes.margin}>
                       <FaTrashAlt fontSize="small" />
