@@ -53,20 +53,16 @@ const Tasks = () => {
        axios.delete('http://localhost:5000/task/' + id)
         .then(res => alert("Task has been deleted.", res.data))
         .catch(err => console.log("Error deleting. " + err))
-
     }
-
 
 
   return (
     <React.Fragment>
         {tasks.map((task) => {
-            
             return (
-                
               <Card key={task._id} className={classes.root} variant="outlined">
                 <CardContent>
-                  <Typography variant="h5" component="h2" id="task_title">
+                  <Typography variant="h5" component="h2" id="task_title" className="hover-3">
                     {task.title}
                   </Typography>
                   <Typography className={classes.pos} color="textSecondary">

@@ -1,5 +1,55 @@
+#menu_burger {
+    color: #fafafa;
+    font-size: 26px;
+}
+
 .avatar_container {
+    // display: flex;
+    // flex-direction: row;
+    // padding-top: 2px;
+    // // justify-content: flex-end;
+
+}
+
+.profileDetails_container {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    align-items: center;
+}
+
+#profile_text {
+    font-size: 17px;
+    font-weight: 700 !important;
+}
+
+.list_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+        color: #13aa52;
+
+        .listItem_icon {
+            color: #13aa52;
+        }
+
+        span {
+            color: #13aa52;
+        }
+    }
+}
+
+.MuiDivider-root {
+    margin-left: 0 !important;
+    margin-top: 1.5em !important;
+}
+
+.listItem_icon {
+    color: #444;
+    font-size: 20px !important;
+    margin-right: 0.3em;
 }
