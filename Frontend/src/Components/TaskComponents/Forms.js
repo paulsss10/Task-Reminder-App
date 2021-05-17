@@ -51,11 +51,12 @@ export const TaskForm = () => {
 
         setTitle("");
         setDescription("");
-        setSchedule("");
+        setSchedule(" ");
         setType("");
         setReminder(false);
       }
     };
+
     
     return (
       <React.Fragment>

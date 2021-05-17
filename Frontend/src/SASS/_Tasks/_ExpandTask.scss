@@ -1,0 +1,44 @@
+.root {
+    box-shadow: 0 20px 75px;
+    font-family: 'Poppins';
+
+    h2 {
+        font-family: 'Poppins';
+        display: block;
+        color: #666;
+        font-size: 2em;
+        margin-block-start: 0.67em;
+        margin-block-end: 0.67em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        font-weight: bold;
+    }
+
+    p {
+        font-family: 'Poppins';
+        font-size: 16px;
+    }
+
+    small {
+        color: #666;
+        margin-top: 1.2em !important;
+        font-family: 'Poppins';
+        margin-bottom: 1.2em !important;
+    }
+
+    @media (min-width: 768.9px) {
+        max-width: 50%;
+    }
+
+    @media (max-width: 767.9px) {
+        max-width: 90%;
+    }
+    
+
+    
+}
+
+.MuiBackdrop-root {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+
+}
