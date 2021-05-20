@@ -1,8 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 
 const TaskRouter = require('./routes/tasks');
+const AuthRouter = require('./routes/auth');
 
 require('dotenv').config();
 
@@ -22,8 +24,9 @@ connection.once('open', () => {
 })
 
 
-app.use('/task', TaskRouter);
+app.use('/task', TaskRouter); //route for tasks
 
+app.use("/auth", AuthRouter); //route for auth
 
 app.listen(port, () => {
     console.log(`Running @Port: ${port}`);

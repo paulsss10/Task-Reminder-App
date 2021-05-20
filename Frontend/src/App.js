@@ -2,6 +2,7 @@ import './App.css';
 import React from 'react';
 import Header from './Components/Header/Header';
 import TasksContainer from './Pages/Tasks/TasksContainer';
+import Auth from './Pages/Auth/Auth';
 
 
 function App() {
@@ -10,9 +11,10 @@ function App() {
     <React.Fragment>
       <Header />
 
-      <main>
+      <Auth />
+      {/* <main>
         <TasksContainer />
-      </main>
+      </main> */}
     </React.Fragment>
     // <TaskProvider>
     //   <React.Fragment>
