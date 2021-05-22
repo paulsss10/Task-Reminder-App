@@ -26,7 +26,9 @@ connection.once('open', () => {
 
 app.use('/task', TaskRouter); //route for tasks
 
-app.use("/auth", AuthRouter); //route for auth
+app.use("/auth", AuthRouter); //route for login and signup
+
+app.use("/user", AuthRouter);
 
 app.listen(port, () => {
     console.log(`Running @Port: ${port}`);

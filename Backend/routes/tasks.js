@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Tasks = require('../models/tasks.model');
+const authenticated = require('../middleware/auth');
 
 // Get all Tasks
 router.route('/').get((req, res) => {
@@ -9,7 +10,7 @@ router.route('/').get((req, res) => {
 });
 
 // Add new Task
-router.route('/add').post((req, res) => {
+router.route('/add').post(authenticated,(req, res) => {
     const title = req.body.title;
     const description = req.body.description;
     const schedule = req.body.schedule;
@@ -32,7 +33,7 @@ router.route('/:id').get((req, res) => {
 
 
 // Delete task
-router.route('/:id').delete((req, res) => {
+router.route('/:id').delete(authenticated,(req, res) => {
     Tasks.findByIdAndDelete(req.params.id)
         .then(task => res.json('A record was deleted.'))
         .catch(err => res.status(400).json('Naay Error sa pagkuha sa specific task: ' + err));
@@ -40,7 +41,7 @@ router.route('/:id').delete((req, res) => {
 
 
 // Update a Task detail/s
-router.route('/update/:id').post((req, res) => {
+router.route('/update/:id').post(authenticated,(req, res) => {
     
     Tasks.findById((req.params.id))
         .then(task => {
