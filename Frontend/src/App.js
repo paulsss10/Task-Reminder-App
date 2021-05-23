@@ -12,19 +12,10 @@ function App() {
       <Header />
 
       <Auth />
-      {/* <main>
-        <TasksContainer />
-      </main> */}
+      <main>
+        {/* <TasksContainer /> */}
+      </main>
     </React.Fragment>
-    // <TaskProvider>
-    //   <React.Fragment>
-    //     <Header />
-
-    //     <main>
-    //       <TasksContainer />
-    //     </main>
-    //   </React.Fragment>
-    // </TaskProvider>
   );
 }
 
